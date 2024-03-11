@@ -1,21 +1,19 @@
 import shutil
-import argparse
+import os
 
 def copy_file(source, destination):
+    """
+    Copy file from source to destination.
+    """
     try:
         shutil.copy(source, destination)
-        print(f"File copied from {source} to {destination}")
+        print(f"File copied successfully from {source} to {destination}")
     except FileNotFoundError:
         print("File not found.")
-    except PermissionError:
-        print("Permission denied.")
-
-def main():
-    parser = argparse.ArgumentParser(description="Copy a file from source to destination.")
-    parser.add_argument("source", help="Source file path")
-    parser.add_argument("destination", help="Destination file path")
-    args = parser.parse_args()
-    copy_file(args.source, args.destination)
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 if __name__ == "__main__":
-    main()
+    source = input("Enter source file path: ")
+    destination = input("Enter destination file path: ")
+    copy_file(source, destination)
